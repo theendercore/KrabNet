@@ -63,10 +63,10 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         delta: Float
     ) {
         val light = this.getBrightness(delta)
-        vertexConsumer.drawVert(qRotation, x, y, z, 1.0f, -1.0f, scale, maxU, maxV, light)
-        vertexConsumer.drawVert(qRotation, x, y, z, 1.0f, 1.0f, scale, maxU, minV, light)
-        vertexConsumer.drawVert(qRotation, x, y, z, -1.0f, 1.0f, scale, minU, minV, light)
-        vertexConsumer.drawVert(qRotation, x, y, z, -1.0f, -1.0f, scale, minU, maxV, light)
+        vertexConsumer.drawVert(qRotation, x, y, z, .5f, -1.0f, scale, maxU, maxV, light)
+        vertexConsumer.drawVert(qRotation, x, y, z, .5f, 1.0f, scale, maxU, minV, light)
+        vertexConsumer.drawVert(qRotation, x, y, z, -.5f, 1.0f, scale, minU, minV, light)
+        vertexConsumer.drawVert(qRotation, x, y, z, -.5f, -1.0f, scale, minU, maxV, light)
     }
 
     @Suppress("LocalVariableName")
