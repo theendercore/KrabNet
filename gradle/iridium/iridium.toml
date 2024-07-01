@@ -1,8 +1,8 @@
-projectTitle = "Team Voided Template"
-modId = "template"
-githubRepo = "Teamvoided/TeamVoidedTemplateMod"
+projectTitle = "KrabNet"
+modId = "krabnet"
+githubRepo = "theendercore/KrabNet"
 discordServerInviteId = "KZ5Q364hEg"
-authors = [ "WiredTomato", "TheEnderCore" ]
+authors = [ "TheEnderCore" ]
 majorMinecraftVersion = "1.21"
 minecraftVersion = "1.21"
 fabricLoaderVersion = "0.15.11"
@@ -10,7 +10,7 @@ fabricApiVersion = "0.100.4+1.21"
 fabricLangKotlinVersion = "1.11.0+kotlin.2.0.0"
 license = "MIT"
 modules = [ ]
-modDescription = "Template Mod Description"
+modDescription = "Ender's sandbox mod"
 # Modmenu badges, values can be: [ library, deprecated ]
 badges = [ ]
 disableKotlin = false
