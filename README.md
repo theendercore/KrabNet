@@ -1,2 +1,2 @@
-# The TeamVoided Template
-Template mod by TeamVoided
+# KrabNet
+ender's sandbox mod
