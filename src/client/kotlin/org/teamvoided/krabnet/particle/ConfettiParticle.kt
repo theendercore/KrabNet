@@ -19,21 +19,21 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
     var scale = 0.1f
 
     var prevAngleX = 0f
-    var angleX = 45f * random.nextFloat()
+    var angleX = random.range(0, 361).toFloat()
         set(value) {
             prevAngleX = field
             field = value
         }
 
     var prevAngleY = 0f
-    var angleY = 45f * random.nextFloat()
+    var angleY = random.range(0, 361).toFloat()
         set(value) {
             prevAngleY = field
             field = value
         }
 
     var prevAngleZ = 0f
-    var angleZ = 45f * random.nextFloat()
+    var angleZ = random.range(0, 361).toFloat()
         set(value) {
             prevAngleZ = field
             field = value
@@ -41,17 +41,21 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
 
     val floorOffset = 0.01f * random.nextFloat()
 
-    override fun getType(): ParticleTextureSheet = ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT
+    override fun getType(): ParticleTextureSheet = ParticleTextureSheet.PARTICLE_SHEET_OPAQUE
 
     init {
         this.gravityStrength = 0.345f + random.nextFloat() * 0.2f
-        this.maxAge = 120
-        this.velocityX = random.nextDouble() * 0.07 * if (random.nextBoolean()) 1 else -1
-        this.velocityY = random.nextDouble() * 0.1
-        this.velocityZ = random.nextDouble() * 0.07 * if (random.nextBoolean()) 1 else -1
+        this.maxAge = random.range(60, 161)
+        this.velocityX += random.nextDouble() * 0.1 * if (random.nextBoolean()) 1 else -1
+        this.velocityY += random.nextDouble() * 0.1
+        this.velocityZ += random.nextDouble() * 0.1 * if (random.nextBoolean()) 1 else -1
         this.colorRed = random.nextFloat() * 0.6f + 0.4f
         this.colorGreen = random.nextFloat() * 0.6f + 0.4f
         this.colorBlue = random.nextFloat() * 0.6f + 0.4f
+
+        prevAngleX = angleX
+        prevAngleY = angleY
+        prevAngleZ = angleZ
     }
 
     override fun tick() {
@@ -64,10 +68,10 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
             angleX = 90f
             angleY = 0f
             prevAngleZ = angleZ
-
-            if (age + 30 == maxAge) {
-                colorAlpha = 1f - ((age / maxAge.toFloat()) * 8)
-            }
+            // optional scale down on end of life, might be nice for diff thing
+//            val ageRatio = age / maxAge.toFloat()
+//            if (ageRatio > 0.85f) scale *= (ageRatio * ageRatio)
+//            if (scale < 0.001f) age = maxAge
         }
     }
 
@@ -91,13 +95,13 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
 
     private fun drawFace(
         vertexConsumer: VertexConsumer, qRotation: Quaternionf, x: Float, y: Float, z: Float, delta: Float,
-        ot2: Quaternionf = Quaternionf()
+        rot2: Quaternionf = Quaternionf()
     ) {
         val light = this.getBrightness(delta)
-        vertexConsumer.drawVert(qRotation, x, y, z, .5f, -1.0f, scale, maxU, maxV, light, ot2)
-        vertexConsumer.drawVert(qRotation, x, y, z, .5f, 1.0f, scale, maxU, minV, light, ot2)
-        vertexConsumer.drawVert(qRotation, x, y, z, -.5f, 1.0f, scale, minU, minV, light, ot2)
-        vertexConsumer.drawVert(qRotation, x, y, z, -.5f, -1.0f, scale, minU, maxV, light, ot2)
+        vertexConsumer.drawVert(qRotation, x, y, z, .5f, -1.0f, scale, maxU, maxV, light, rot2)
+        vertexConsumer.drawVert(qRotation, x, y, z, .5f, 1.0f, scale, maxU, minV, light, rot2)
+        vertexConsumer.drawVert(qRotation, x, y, z, -.5f, 1.0f, scale, minU, minV, light, rot2)
+        vertexConsumer.drawVert(qRotation, x, y, z, -.5f, -1.0f, scale, minU, maxV, light, rot2)
     }
 
     @Suppress("LocalVariableName")
