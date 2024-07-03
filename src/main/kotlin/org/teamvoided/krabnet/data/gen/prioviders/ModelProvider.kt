@@ -8,7 +8,7 @@ import net.minecraft.data.client.model.Models
 import net.minecraft.item.Items
 import org.teamvoided.krabnet.init.KNItems
 
-class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
+class ModelProvider(o: FabricDataOutput) : FabricModelProvider(o) {
     override fun generateBlockStateModels(gen: BlockStateModelGenerator) {}
 
     override fun generateItemModels(gen: ItemModelGenerator) {
