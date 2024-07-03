@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.krabnet.KrabNet.log
+import org.teamvoided.krabnet.data.gen.prioviders.ModelProvider
 
 @Suppress("unused")
 class KrabNetData : DataGeneratorEntrypoint {
@@ -11,7 +12,7 @@ class KrabNetData : DataGeneratorEntrypoint {
         log.info("Hello from DataGen")
         val pack = gen.createPack()
 
-//        pack.addProvider(::TemplateWorldGenerator)
+        pack.addProvider(::ModelProvider)
     }
 
     override fun buildRegistry(gen: RegistrySetBuilder) {
