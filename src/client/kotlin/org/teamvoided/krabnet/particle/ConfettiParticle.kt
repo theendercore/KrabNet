@@ -106,15 +106,14 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         override fun createParticle(
             defaultParticleType: DefaultParticleType,
             world: ClientWorld,
-            x: Double,
-            y: Double,
-            z: Double,
-            xSpeed: Double,
-            ySpeed: Double,
-            zSpeed: Double
+            x: Double, y: Double, z: Double,
+            xVelocity: Double, yVelocity: Double, zVelocity: Double
         ): Particle {
             val confetti = ConfettiParticle(world, x, y, z)
             confetti.setSprite(this.spriteProvider)
+            confetti.velocityX += xVelocity
+            confetti.velocityY += yVelocity
+            confetti.velocityZ += zVelocity
             return confetti
         }
     }
