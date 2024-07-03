@@ -15,6 +15,7 @@ import kotlin.math.min
 class ConfettiStickItem(settings: Settings) : Item(settings) {
 
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
+        player.itemCooldownManager.set(this, 2)
         if (world.isClient) {
             val dir = player.getRotationVec(0f)
             val random = world.random
@@ -26,8 +27,10 @@ class ConfettiStickItem(settings: Settings) : Item(settings) {
                     .add(player.velocity)
 
                 world.addParticle(KNParticleTypes.CONFETTI, player.pos.add(0.0, 1.5, 0.0), newDir)
-                world.playSoundFromEntity( player, SoundEvents.BLOCK_NOTE_BLOCK_HARP.value(), SoundCategory.PLAYERS, 1.0f, 1.0f)
             }
+            world.playSoundFromEntity(
+                player, SoundEvents.BLOCK_COBWEB_BREAK, SoundCategory.PLAYERS, 4.0f, 8.0f
+            )
         }
         return super.use(world, player, hand)
     }
