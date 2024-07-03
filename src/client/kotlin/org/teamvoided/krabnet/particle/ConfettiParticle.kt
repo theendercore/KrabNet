@@ -12,6 +12,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import org.joml.Quaternionf
 import org.teamvoided.krabnet.utils.rad
+import org.teamvoided.krabnet.utils.stoppedByCollision
 
 class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : SpriteParticle(world, x, y, z) {
     var scale = 0.1f
@@ -50,6 +51,7 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         this.colorRed = random.nextFloat() * 0.6f + 0.55f
         this.colorGreen = random.nextFloat() * 0.6f + 0.55f
         this.colorBlue = random.nextFloat() * 0.6f + 0.55f
+        velocityMultiplier = 0.85f
 
         prevAngleX = angleX
         prevAngleY = angleY
@@ -62,10 +64,14 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
             angleX += 15f
             angleY += 15f
             angleZ += 15f
+
+            this.stoppedByCollision(false)
         } else {
             angleX = 90f
             angleY = 0f
             prevAngleZ = angleZ
+            if (age % 6 == 0) this.stoppedByCollision(false)
+
             // optional scale down on end of life, might be nice for diff thing
             /* val ageRatio = age / maxAge.toFloat()
              if (ageRatio > 0.85f) scale *= (ageRatio * ageRatio)
