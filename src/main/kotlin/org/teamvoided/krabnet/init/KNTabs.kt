@@ -3,10 +3,11 @@ package org.teamvoided.krabnet.init
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.registry.Holder
 import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import org.teamvoided.krabnet.KrabNet.id
-import org.teamvoided.krabnet.utils.register
+import org.teamvoided.krabnet.utils.registerHolder
 
 object KNTabs {
     fun init() {}
@@ -19,6 +20,6 @@ object KNTabs {
     )
 
 
-    fun <T : ItemGroup.Builder> register(name: String, tab: T): ItemGroup =
-        Registries.ITEM_GROUP.register(id(name), tab.build())
+    fun <T : ItemGroup.Builder> register(name: String, tab: T): Holder<ItemGroup> =
+        Registries.ITEM_GROUP.registerHolder(id(name), tab.build())
 }
