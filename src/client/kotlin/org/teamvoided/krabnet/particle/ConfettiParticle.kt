@@ -6,14 +6,12 @@ import net.minecraft.client.particle.ParticleFactory
 import net.minecraft.client.particle.ParticleTextureSheet
 import net.minecraft.client.particle.SpriteProvider
 import net.minecraft.client.render.Camera
-import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.particle.DefaultParticleType
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
-import org.joml.Math.toRadians
 import org.joml.Quaternionf
-import org.joml.Vector3f
+import org.teamvoided.krabnet.utils.rad
 
 class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : SpriteParticle(world, x, y, z) {
     var scale = 0.1f
@@ -45,13 +43,13 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
 
     init {
         this.gravityStrength = 0.345f + random.nextFloat() * 0.2f
-        this.maxAge = random.range(60, 161)
-        this.velocityX += random.nextDouble() * 0.1 * if (random.nextBoolean()) 1 else -1
-        this.velocityY += random.nextDouble() * 0.1
-        this.velocityZ += random.nextDouble() * 0.1 * if (random.nextBoolean()) 1 else -1
-        this.colorRed = random.nextFloat() * 0.6f + 0.4f
-        this.colorGreen = random.nextFloat() * 0.6f + 0.4f
-        this.colorBlue = random.nextFloat() * 0.6f + 0.4f
+        this.maxAge = random.range(60, 261)
+        this.velocityX += random.nextDouble() * 0.02 * if (random.nextBoolean()) 1 else -1
+        this.velocityY += random.nextDouble() * 0.02
+        this.velocityZ += random.nextDouble() * 0.02 * if (random.nextBoolean()) 1 else -1
+        this.colorRed = random.nextFloat() * 0.6f + 0.7f
+        this.colorGreen = random.nextFloat() * 0.6f + 0.7f
+        this.colorBlue = random.nextFloat() * 0.6f + 0.7f
 
         prevAngleX = angleX
         prevAngleY = angleY
@@ -69,9 +67,9 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
             angleY = 0f
             prevAngleZ = angleZ
             // optional scale down on end of life, might be nice for diff thing
-//            val ageRatio = age / maxAge.toFloat()
-//            if (ageRatio > 0.85f) scale *= (ageRatio * ageRatio)
-//            if (scale < 0.001f) age = maxAge
+            /* val ageRatio = age / maxAge.toFloat()
+             if (ageRatio > 0.85f) scale *= (ageRatio * ageRatio)
+             if (scale < 0.001f) age = maxAge*/
         }
     }
 
@@ -104,26 +102,6 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         vertexConsumer.drawVert(qRotation, x, y, z, -.5f, -1.0f, scale, minU, maxV, light, rot2)
     }
 
-    @Suppress("LocalVariableName")
-    private fun VertexConsumer.drawVert(
-        qRotation: Quaternionf,
-        x: Float, y: Float, z: Float, x2: Float, y2: Float, scale: Float, U: Float, V: Float, light: Int,
-        rot2: Quaternionf = Quaternionf()
-    ) {
-        val pos = Vector3f(x2, y2, 0.0f)
-            .rotate(rot2)
-            .rotate(qRotation)
-            .mul(scale)
-            .add(x, y, z)
-
-        this.method_22912(pos.x(), pos.y(), pos.z())
-            .method_22913(U, V)
-            .method_22922(OverlayTexture.DEFAULT_UV)
-            .method_22915(colorRed, colorGreen, colorBlue, colorAlpha)
-            .method_60803(light)
-    }
-
-
     class ConfettiFactory(private val spriteProvider: SpriteProvider) : ParticleFactory<DefaultParticleType> {
         override fun createParticle(
             defaultParticleType: DefaultParticleType,
@@ -140,6 +118,4 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
             return confetti
         }
     }
-
-    val Number.rad: Float get() = toRadians(this.toFloat())
 }
