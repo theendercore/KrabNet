@@ -6,10 +6,12 @@ import net.minecraft.particle.ParticleType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import org.teamvoided.krabnet.KrabNet.id
+import org.teamvoided.krabnet.particle.ConfettiEffect
 
 object KNParticleTypes {
 
     val CONFETTI = FabricParticleTypes.simple()
+    val CONFETTI_EMMITER = FabricParticleTypes.complex(ConfettiEffect.CODEC, ConfettiEffect.PACKET_CODEC)
     fun init() {
         register("confetti", CONFETTI)
     }

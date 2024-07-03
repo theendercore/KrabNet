@@ -10,5 +10,6 @@ object KrabNetClient{
     fun init() {
         log.info("Hello from Client")
         ParticleFactoryRegistry.getInstance().register(KNParticleTypes.CONFETTI, ConfettiParticle::ConfettiFactory)
+        ParticleFactoryRegistry.getInstance().register(KNParticleTypes.CONFETTI_EMMITER, ConfettiParticle::ConfettiEmitterFactory)
     }
 }

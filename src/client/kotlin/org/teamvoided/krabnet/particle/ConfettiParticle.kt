@@ -47,9 +47,9 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         this.velocityX += random.nextDouble() * 0.02 * if (random.nextBoolean()) 1 else -1
         this.velocityY += random.nextDouble() * 0.02
         this.velocityZ += random.nextDouble() * 0.02 * if (random.nextBoolean()) 1 else -1
-        this.colorRed = random.nextFloat() * 0.6f + 0.7f
-        this.colorGreen = random.nextFloat() * 0.6f + 0.7f
-        this.colorBlue = random.nextFloat() * 0.6f + 0.7f
+        this.colorRed = random.nextFloat() * 0.6f + 0.55f
+        this.colorGreen = random.nextFloat() * 0.6f + 0.55f
+        this.colorBlue = random.nextFloat() * 0.6f + 0.55f
 
         prevAngleX = angleX
         prevAngleY = angleY
@@ -105,6 +105,22 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
     class ConfettiFactory(private val spriteProvider: SpriteProvider) : ParticleFactory<DefaultParticleType> {
         override fun createParticle(
             defaultParticleType: DefaultParticleType,
+            world: ClientWorld,
+            x: Double, y: Double, z: Double,
+            xVelocity: Double, yVelocity: Double, zVelocity: Double
+        ): Particle {
+            val confetti = ConfettiParticle(world, x, y, z)
+            confetti.setSprite(this.spriteProvider)
+            confetti.velocityX += xVelocity
+            confetti.velocityY += yVelocity
+            confetti.velocityZ += zVelocity
+            return confetti
+        }
+    }
+
+    class ConfettiEmitterFactory(private val spriteProvider: SpriteProvider) : ParticleFactory<ConfettiEffect> {
+        override fun createParticle(
+            confettiEffect: ConfettiEffect,
             world: ClientWorld,
             x: Double, y: Double, z: Double,
             xVelocity: Double, yVelocity: Double, zVelocity: Double
