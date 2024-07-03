@@ -12,6 +12,6 @@ class ModelProvider(o: FabricDataOutput) : FabricModelProvider(o) {
     override fun generateBlockStateModels(gen: BlockStateModelGenerator) {}
 
     override fun generateItemModels(gen: ItemModelGenerator) {
-        gen.register(KNItems.CONFETTI_STICK, Items.STICK, Models.SINGLE_LAYER_ITEM)
+        gen.register(KNItems.CONFETTI_STICK, Items.STICK, Models.HANDHELD_MACE)
     }
 }
