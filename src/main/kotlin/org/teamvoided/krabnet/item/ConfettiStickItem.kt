@@ -5,6 +5,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.stat.Stats
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
@@ -15,7 +16,9 @@ import kotlin.math.min
 class ConfettiStickItem(settings: Settings) : Item(settings) {
 
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        player.itemCooldownManager.set(this, 2)
+        val stack = player.getStackInHand(hand)
+
+        player.itemCooldownManager[this] = 2
         if (world.isClient) {
             val dir = player.getRotationVec(0f)
             val random = world.random
@@ -32,6 +35,8 @@ class ConfettiStickItem(settings: Settings) : Item(settings) {
                 player, SoundEvents.BLOCK_COBWEB_BREAK, SoundCategory.PLAYERS, 4.0f, 8.0f
             )
         }
-        return super.use(world, player, hand)
+
+        player.incrementStat(Stats.USED.getOrCreateStat(this))
+        return TypedActionResult.success(stack, world.isClient())
     }
 }
