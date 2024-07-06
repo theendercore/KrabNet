@@ -13,9 +13,7 @@ import java.util.concurrent.CompletableFuture
 
 class EnLangProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(o, r) {
     override fun generateTranslations(reg: HolderLookup.Provider, gen: TranslationBuilder) {
-        KNItems.tabItems.forEach {
-            gen.add(it.translationKey, lang(it.id))
-        }
+        KNItems.tabItems.forEach { gen.add(it.translationKey, lang(it.id)) }
 
         KNTabs.KN_TAB.key.ifPresent { gen.add(it, lang(it.value)) }
     }
