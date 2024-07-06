@@ -17,10 +17,10 @@ class ConfettiBombItem(settings: Settings) : Item(settings) {
         val itemStack = user.getStackInHand(hand)
         world.playSound(
             null, user.x, user.y, user.z,
-            SoundEvents.ENTITY_WIND_CHARGE_THROW, SoundCategory.PLAYERS,
+            SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.PLAYERS,
             0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f)
         )
-        user.itemCooldownManager[this] = 10
+        user.itemCooldownManager[this] = 4
         if (!world.isClient) {
             val confettiBomb = ConfettiBombEntity(world, user)
             confettiBomb.setItem(itemStack)
