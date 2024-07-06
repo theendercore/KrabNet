@@ -15,7 +15,7 @@ class EnLangProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
     override fun generateTranslations(reg: HolderLookup.Provider, gen: TranslationBuilder) {
         KNItems.tabItems.forEach { gen.add(it.translationKey, lang(it.id)) }
 
-        KNTabs.KN_TAB.key.ifPresent { gen.add(it, lang(it.value)) }
+        KNTabs.KN_TAB.key.ifPresent { gen.add(it, "KrabNet") }
     }
 
     private fun lang(item: Identifier): String = WordUtils.capitalize(item.path.replace("_", " "))
