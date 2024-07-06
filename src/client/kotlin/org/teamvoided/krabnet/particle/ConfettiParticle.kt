@@ -48,9 +48,9 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         this.velocityX += random.nextDouble() * 0.02 * if (random.nextBoolean()) 1 else -1
         this.velocityY += random.nextDouble() * 0.02
         this.velocityZ += random.nextDouble() * 0.02 * if (random.nextBoolean()) 1 else -1
-        this.colorRed = random.nextFloat() * 0.6f + 0.55f
-        this.colorGreen = random.nextFloat() * 0.6f + 0.55f
-        this.colorBlue = random.nextFloat() * 0.6f + 0.55f
+        this.colorRed = random.nextFloat() * 0.6f + 0.41f
+        this.colorGreen = random.nextFloat() * 0.6f + 0.41f
+        this.colorBlue = random.nextFloat() * 0.6f + 0.41f
         velocityMultiplier = 0.85f
 
         prevAngleX = angleX
