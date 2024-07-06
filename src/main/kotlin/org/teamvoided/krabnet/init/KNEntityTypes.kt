@@ -14,12 +14,11 @@ object KNEntityTypes {
     val CONFETTI_BOMB = register(
         "confetti_bomb",
         EntityType.Builder.create(EntityType.EntityFactory(::ConfettiBombEntity), SpawnGroup.MISC)
-            .setDimensions(0.98f, 0.98f)
-            .setEyeHeight(0.15f)
+            .setDimensions(0.2f, 0.2f).setEyeHeight(0.15f)
     )
 
     @Suppress("UNCHECKED_CAST")
-    private fun <J :Entity, T : EntityType.Builder<J>> register(name: String, entityBuilder: T): EntityType<J> =
+    private fun <J : Entity, T : EntityType.Builder<J>> register(name: String, entityBuilder: T): EntityType<J> =
         Registries.ENTITY_TYPE.register(id(name), entityBuilder.build()) as EntityType<J>
 
 }
