@@ -12,7 +12,7 @@ import org.teamvoided.krabnet.init.KNParticleTypes
 
 data class ConfettiEffect(val int: Int) : ParticleEffect {
 
-    override fun getType(): ParticleType<ConfettiEffect> = KNParticleTypes.CONFETTI_EMMITER
+    override fun getType(): ParticleType<ConfettiEffect> = KNParticleTypes.CONFETTI_EMITTER
 
     companion object {
         val CODEC: MapCodec<ConfettiEffect> =
@@ -22,10 +22,5 @@ data class ConfettiEffect(val int: Int) : ParticleEffect {
             }
         val PACKET_CODEC: PacketCodec<RegistryByteBuf, ConfettiEffect> =
             PacketCodec.tuple(PacketCodecs.INT, { it.int }, ::ConfettiEffect)
-
-//        val VECTOR3F_CODEC: Codec<Vector3f> = Codec.FLOAT.listOf().comapFlatMap(
-//            { list -> Util.fixedSizeList(list, 3).map { Vector3f(it[0], it[1], it[2]) } },
-//            { listOf(it.x, it.y, it.z) }
-//        )
     }
 }
