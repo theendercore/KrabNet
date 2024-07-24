@@ -10,16 +10,16 @@ import org.teamvoided.krabnet.KrabNet.id
 import org.teamvoided.krabnet.utils.registerHolder
 
 object KNTabs {
-    fun init() {}
+    fun init() = Unit
 
     val KN_TAB = register(
         "krabnet", FabricItemGroup.builder()
             .icon { KNItems.CONFETTI_STICK.defaultStack }
             .name(Text.translatable("itemGroup.krabnet"))
-            .entries { _, entires -> entires.addStacks(KNItems.tabItems.map(Item::getDefaultStack)) }
+            .entries { _, entries -> entries.addStacks(KNItems.tabItems.map(Item::getDefaultStack)) }
     )
 
 
-    fun <T : ItemGroup.Builder> register(name: String, tab: T): Holder<ItemGroup> =
+    private fun <T : ItemGroup.Builder> register(name: String, tab: T): Holder<ItemGroup> =
         Registries.ITEM_GROUP.registerHolder(id(name), tab.build())
 }

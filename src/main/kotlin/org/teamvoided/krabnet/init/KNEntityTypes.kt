@@ -9,7 +9,7 @@ import org.teamvoided.krabnet.entity.ConfettiBombEntity
 import org.teamvoided.krabnet.utils.register
 
 object KNEntityTypes {
-    fun init() {}
+    fun init()  = Unit
 
     val CONFETTI_BOMB = register(
         "confetti_bomb",
