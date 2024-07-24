@@ -9,6 +9,7 @@ import net.minecraft.data.client.model.ModelIds
 import net.minecraft.data.client.model.Models
 import net.minecraft.item.Item
 import net.minecraft.item.Items
+import net.minecraft.util.Identifier
 import org.teamvoided.krabnet.init.KNItems
 import java.util.*
 
@@ -22,4 +23,7 @@ class ModelProvider(o: FabricDataOutput) : FabricModelProvider(o) {
 
     private val <T : Any> T.myb get() = Optional.of<T>(this)
     private fun parentedModel(item: Item) = Model(ModelIds.getItemModelId(item).myb, Optional.empty())
+
+    fun parentedItemModel(id:Identifier) = Model(Optional.of(id.withPrefix("item/")), Optional.empty())
+
 }
