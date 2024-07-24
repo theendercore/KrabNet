@@ -1,5 +1,6 @@
 package org.teamvoided.krabnet.utils
 
+import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.registry.Holder
 import net.minecraft.registry.Registry
@@ -10,6 +11,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.random.RandomGenerator
 import net.minecraft.world.World
+import org.teamvoided.krabnet.init.KNDataComponents
 
 fun <T> Registry<T>.register(id: Identifier, entry: T): T = Registry.register(this, id, entry)
 fun <T> Registry<T>.registerHolder(id: Identifier, entry: T): Holder<T> = Registry.registerHolder(this, id, entry)
@@ -24,3 +26,6 @@ fun ServerWorld.playSound(pos: Vec3d, sound: SoundEvent, category: SoundCategory
     this.playSound(null, pos.x, pos.y, pos.z, sound, category, volume, pitch)
 
 fun RandomGenerator.posOrNeg(): Int = if (this.nextBoolean()) 1 else -1
+
+
+fun ItemStack.confettiLevel(): Int? = this.get(KNDataComponents.CONFETTI_LEVEL)

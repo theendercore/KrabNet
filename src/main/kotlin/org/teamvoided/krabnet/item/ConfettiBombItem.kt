@@ -1,7 +1,6 @@
 package org.teamvoided.krabnet.item
 
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -11,7 +10,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import org.teamvoided.krabnet.entity.ConfettiBombEntity
 
-class ConfettiBombItem(settings: Settings) : Item(settings) {
+class ConfettiBombItem(settings: Settings) : ConfettiItem(settings) {
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val itemStack = user.getStackInHand(hand)

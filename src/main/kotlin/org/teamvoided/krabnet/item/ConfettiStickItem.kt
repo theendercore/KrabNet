@@ -1,7 +1,6 @@
 package org.teamvoided.krabnet.item
 
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -11,21 +10,23 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import org.teamvoided.krabnet.init.KNParticleTypes
+import org.teamvoided.krabnet.utils.confettiLevel
 import org.teamvoided.krabnet.utils.playSound
 import org.teamvoided.krabnet.utils.spawnParticles
 import kotlin.math.min
 
-class ConfettiStickItem(settings: Settings) : Item(settings) {
+class ConfettiStickItem(settings: Settings) : ConfettiItem(settings) {
 
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = player.getStackInHand(hand)
 
         player.itemCooldownManager[this] = 2
+        val confetti = stack.confettiLevel() ?: return TypedActionResult.pass(stack)
         if (!world.isClient) {
             val dir = player.getRotationVec(0f)
             val random = world.random
             val serverW = world as ServerWorld
-            repeat(150) {
+            repeat(150 * confetti) {
                 val newDir = dir
                     .add(random.nextDouble() - 0.5, random.nextDouble() - 0.1, random.nextDouble() - 0.5)
                     .normalize()
