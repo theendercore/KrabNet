@@ -6,6 +6,7 @@ import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.krabnet.KrabNet.log
 import org.teamvoided.krabnet.data.gen.prioviders.ModelProvider
 import org.teamvoided.krabnet.data.gen.prioviders.EnLangProvider
+import org.teamvoided.krabnet.data.gen.tag.ItemTagProvider
 
 @Suppress("unused")
 class KrabNetData : DataGeneratorEntrypoint {
@@ -15,6 +16,7 @@ class KrabNetData : DataGeneratorEntrypoint {
 
         pack.addProvider(::ModelProvider)
         pack.addProvider(::EnLangProvider)
+        pack.addProvider(::ItemTagProvider)
     }
 
     override fun buildRegistry(gen: RegistrySetBuilder) {

@@ -1,5 +1,8 @@
 package org.teamvoided.krabnet.utils
 
+import net.minecraft.component.DataComponentTypes
+import net.minecraft.component.type.DyedColorComponent
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.registry.Holder
@@ -29,3 +32,19 @@ fun RandomGenerator.posOrNeg(): Int = if (this.nextBoolean()) 1 else -1
 
 
 fun ItemStack.confettiLevel(): Int? = this.get(KNDataComponents.CONFETTI_LEVEL)
+
+
+fun Item.stackWithMaxLevel(): ItemStack {
+    val stack = this.defaultStack
+    stack.set(KNDataComponents.CONFETTI_LEVEL, 10)
+    return stack
+}
+
+fun ItemStack.setColor(color: Int, showInTooltip: Boolean = false): ItemStack {
+    this.set(
+        DataComponentTypes.DYED_COLOR, DyedColorComponent(
+            color, this.get(DataComponentTypes.DYED_COLOR)?.shownInTooltip ?: showInTooltip
+        )
+    )
+    return this
+}

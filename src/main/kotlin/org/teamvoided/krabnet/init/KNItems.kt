@@ -1,5 +1,7 @@
 package org.teamvoided.krabnet.init
 
+import net.minecraft.component.DataComponentTypes
+import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import org.teamvoided.krabnet.KrabNet.id
@@ -11,10 +13,13 @@ object KNItems {
     val tabItems = mutableListOf<Item>()
     fun init() = Unit
 
-    val CONFETTI_STICK = register("confetti_stick", ConfettiStickItem(Item.Settings()))
+    val PARTY_POPPER = register(
+        "party_popper",
+        ConfettiStickItem(Item.Settings().component(DataComponentTypes.DYED_COLOR, DyedColorComponent(0xb450ca, false)))
+    )
     val CONFETTI_BOMB = register("confetti_bomb", ConfettiBombItem(Item.Settings()))
 
-    val CONFETTI = register("confetti", Item(Item.Settings()))
+//    val CONFETTI = register("confetti", Item(Item.Settings()))
 
 
     fun <T : Item> register(name: String, item: T): Item {

@@ -15,7 +15,7 @@ import org.teamvoided.krabnet.utils.playSound
 import org.teamvoided.krabnet.utils.spawnParticles
 import kotlin.math.min
 
-class ConfettiStickItem(settings: Settings) : ConfettiItem(settings) {
+class ConfettiStickItem(settings: Settings) : ConfettiItem(settings)  {
 
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = player.getStackInHand(hand)
