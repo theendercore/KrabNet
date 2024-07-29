@@ -7,9 +7,7 @@ import net.minecraft.registry.Holder
 import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import org.teamvoided.krabnet.KrabNet.id
-import org.teamvoided.krabnet.utils.registerHolder
-import org.teamvoided.krabnet.utils.setColor
-import org.teamvoided.krabnet.utils.stackWithMaxLevel
+import org.teamvoided.krabnet.utils.*
 
 object KNTabs {
     fun init() = Unit
@@ -19,12 +17,16 @@ object KNTabs {
             .icon { KNItems.PARTY_POPPER.defaultStack }
             .name(Text.translatable("itemGroup.krabnet"))
             .entries { _, entries ->
-                entries.addStacks(KNItems.tabItems.map(Item::getDefaultStack))
+                entries.addItems(
+                    KNItems.PARTY_POPPER,
+                    KNItems.CONFETTI_BOMB
+                )
                 entries.addStacks(
                     listOf(
-                        KNItems.PARTY_POPPER.stackWithMaxLevel()
-                            .setColor(0xff0f0f, false),
-                        KNItems.CONFETTI_BOMB.stackWithMaxLevel()
+                        KNItems.PARTY_POPPER.stackWithMaxLevel().setColor(0xff0f0f ),
+                        KNItems.CONFETTI_BOMB.stackWithMaxLevel(),
+                        KNItems.PARTY_POPPER.defaultStack.setColor(0x9842ac ).setUnbreakable()
+                            .setCustomName("Ender's Party Popper")
                     )
                 )
 
@@ -32,6 +34,12 @@ object KNTabs {
     )
 
 
+    @Suppress("SameParameterValue")
     private fun <T : ItemGroup.Builder> register(name: String, tab: T): Holder<ItemGroup> =
         Registries.ITEM_GROUP.registerHolder(id(name), tab.build())
+
+
 }
+
+private fun ItemGroup.ItemStackCollector.addItems(vararg item: Item) = this.addStacks(item.map(Item::getDefaultStack))
+

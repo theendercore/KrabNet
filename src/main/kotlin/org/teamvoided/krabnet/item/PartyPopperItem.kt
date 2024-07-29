@@ -1,5 +1,6 @@
 package org.teamvoided.krabnet.item
 
+import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
@@ -15,7 +16,7 @@ import org.teamvoided.krabnet.utils.playSound
 import org.teamvoided.krabnet.utils.spawnParticles
 import kotlin.math.min
 
-class ConfettiStickItem(settings: Settings) : ConfettiItem(settings)  {
+class PartyPopperItem(settings: Settings) : ConfettiItem(settings) {
 
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = player.getStackInHand(hand)
@@ -36,6 +37,7 @@ class ConfettiStickItem(settings: Settings) : ConfettiItem(settings)  {
                 serverW.spawnParticles(KNParticleTypes.CONFETTI, player.pos.add(0.0, 1.5, 0.0), newDir)
             }
             serverW.playSound(player.pos, SoundEvents.BLOCK_COBWEB_BREAK, SoundCategory.PLAYERS, 4.0f, 8.0f)
+            if (stack.get(DataComponentTypes.UNBREAKABLE) == null) stack.consume(1, player)
         }
 
         player.incrementStat(Stats.USED.getOrCreateStat(this))

@@ -6,7 +6,7 @@ import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import org.teamvoided.krabnet.KrabNet.id
 import org.teamvoided.krabnet.item.ConfettiBombItem
-import org.teamvoided.krabnet.item.ConfettiStickItem
+import org.teamvoided.krabnet.item.PartyPopperItem
 import org.teamvoided.krabnet.utils.register
 
 object KNItems {
@@ -15,7 +15,7 @@ object KNItems {
 
     val PARTY_POPPER = register(
         "party_popper",
-        ConfettiStickItem(Item.Settings().component(DataComponentTypes.DYED_COLOR, DyedColorComponent(0xb450ca, false)))
+        PartyPopperItem(Item.Settings().component(DataComponentTypes.DYED_COLOR, DyedColorComponent(0xffffff, false)))
     )
     val CONFETTI_BOMB = register("confetti_bomb", ConfettiBombItem(Item.Settings()))
 
