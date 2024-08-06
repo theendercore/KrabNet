@@ -99,7 +99,7 @@ publishScript {
 uploadConfig {
 //    debugMode = true
     modrinthId = modrinth_id
-    curseId = curse_id
+//    curseId = curse_id
 
     changeLog = "- init"
 
