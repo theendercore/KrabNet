@@ -35,11 +35,11 @@ abstract class SpriteParticle : Particle {
             .mul(scale)
             .add(x, y, z)
 
-        this.method_22912(pos.x(), pos.y(), pos.z())
-            .method_22913(U, V)
-            .method_22922(OverlayTexture.DEFAULT_UV)
-            .method_22915(colorRed, colorGreen, colorBlue, colorAlpha)
-            .method_60803(light)
+        this.xyz(pos.x(), pos.y(), pos.z())
+            .uv0(U, V)
+            .uv1(OverlayTexture.DEFAULT_UV)
+            .color(colorRed, colorGreen, colorBlue, colorAlpha)
+            .uv2(light)
     }
 
     fun setSprite(spriteProvider: SpriteProvider) {
@@ -47,8 +47,6 @@ abstract class SpriteParticle : Particle {
     }
 
     fun setSpriteForAge(spriteProvider: SpriteProvider) {
-        if (!this.dead) {
-            this.sprite = spriteProvider.getSprite(this.age, this.maxAge)
-        }
+        if (!this.dead) this.sprite = spriteProvider.getSprite(this.age, this.maxAge)
     }
 }

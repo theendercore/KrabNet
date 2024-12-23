@@ -93,7 +93,7 @@ class ConfettiParticle(world: ClientWorld, x: Double, y: Double, z: Double) : Sp
         val x = (MathHelper.lerp(delta.toDouble(), prevPosX, x) - camPos.getX()).toFloat()
         val y = (MathHelper.lerp(delta.toDouble(), prevPosY, y) - camPos.getY() + floorOffset).toFloat()
         val z = (MathHelper.lerp(delta.toDouble(), prevPosZ, z) - camPos.getZ()).toFloat()
-        this.drawFace(vertexConsumer, qRotation, x, y, z, delta)
+        if (!onGround) this.drawFace(vertexConsumer, qRotation, x, y, z, delta)
         this.drawFace(vertexConsumer, qRotation, x, y, z, delta, Quaternionf().rotateLocalY(180.rad))
     }
 
