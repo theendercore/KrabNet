@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.*
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.render.ShaderProgram
 import net.minecraft.client.render.block.entity.EndPortalBlockEntityRenderer
 import org.teamvoided.krabnet.KrabNet.id
@@ -16,7 +15,7 @@ object Rendering {
     private var customType: ShaderProgram? = null
     fun init() {
         CoreShaderRegistrationCallback.EVENT.register { ctx ->
-            ctx.register(id("rendertype_custom"), VertexFormats.POSITION_COLOR_LIGHT) { customType = it }
+            ctx.register(id("rendertype_custom"), VertexFormats.POSITION_COLOR) { customType = it }
         }
         WorldRenderEvents.AFTER_ENTITIES.register(::renderCustom)
     }
@@ -25,14 +24,14 @@ object Rendering {
         var profiler = ctx.profiler()
         profiler.push("krabNet")
 
-        val color = 0x90ff9090.toInt()
+        val color = 0xffffffff.toInt()
         val tessellator = Tessellator.getInstance()
         val pose = this.peek().model
 
         this.push()
         RenderSystem.disableDepthTest()
         RenderSystem.enableBlend()
-        RenderSystem.setShader(GameRenderer::getPositionColorShader)
+        RenderSystem.setShader { customType }
         RenderSystem.setShaderTexture(0, EndPortalBlockEntityRenderer.PORTAL_TEXTURE)
         RenderSystem.disableCull()
         val builder: BufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR)
