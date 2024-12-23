@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallbac
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents
 import net.minecraft.client.render.ShaderProgram
-import net.minecraft.client.render.block.entity.EndPortalBlockEntityRenderer
 import org.teamvoided.krabnet.KrabNet.id
 import org.teamvoided.krabnet.utils.Vec3d
 import org.teamvoided.krabnet.utils.xyz
@@ -32,14 +31,19 @@ object Rendering {
         RenderSystem.disableDepthTest()
         RenderSystem.enableBlend()
         RenderSystem.setShader { customType }
-        RenderSystem.setShaderTexture(0, EndPortalBlockEntityRenderer.PORTAL_TEXTURE)
+        RenderSystem.disableCull()
+//        RenderSystem.setShaderTexture(0, EndPortalBlockEntityRenderer.PORTAL_TEXTURE)
+//        RenderSystem.setShaderTexture(1, EndPortalBlockEntityRenderer.SKY_TEXTURE)
+
         RenderSystem.disableCull()
         val builder: BufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR)
         val camPos = ctx.camera().pos
+
         builder.xyz(pose, Vec3d(0), camPos).color(color)
         builder.xyz(pose, Vec3d(0, 0, 1), camPos).color(color)
         builder.xyz(pose, Vec3d(1, 0, 1), camPos).color(color)
         builder.xyz(pose, Vec3d(1, 0, 0), camPos).color(color)
+
         builder.end()?.let { BufferRenderer.drawWithShader(it) }
         this.pop()
 
