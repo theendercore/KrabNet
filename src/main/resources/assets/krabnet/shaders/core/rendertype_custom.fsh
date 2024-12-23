@@ -2,7 +2,7 @@
 
 in vec4 vertexColor;
 
-uniform vec4 ColorModulator;
+uniform float GameTime;
 
 out vec4 fragColor;
 
@@ -11,5 +11,6 @@ void main() {
     if (color.a == 0.0) {
         discard;
     }
-    fragColor = color * ColorModulator;
+    float x = sin(GameTime * 1000.);
+    fragColor = vec4(x, x, x, 1.);//color * ColorModulator * GameTime;
 }

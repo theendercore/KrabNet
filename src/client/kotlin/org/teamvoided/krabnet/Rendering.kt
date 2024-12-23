@@ -32,7 +32,9 @@ object Rendering {
         RenderSystem.disableDepthTest()
         RenderSystem.enableBlend()
         RenderSystem.setShader { customType }
-        RenderSystem.setShaderTexture(0, EndPortalBlockEntityRenderer.PORTAL_TEXTURE)
+//        RenderSystem.setShaderTexture(0, EndPortalBlockEntityRenderer.PORTAL_TEXTURE)
+//        RenderSystem.setShaderTexture(1, EndPortalBlockEntityRenderer.SKY_TEXTURE)
+
         RenderSystem.disableCull()
         val builder: BufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR)
         val camPos = ctx.camera().pos
