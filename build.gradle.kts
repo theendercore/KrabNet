@@ -60,6 +60,13 @@ loom {
             runDir("run")
             programArgs("--quickPlaySingleplayer", "test")
         }
+
+        create("Einstein") {
+            client()
+            ideConfigGenerated(true)
+            runDir("run")
+            programArgs("--uuid", "d71e4b41-9315-499f-a934-ca925421fb38", "--username", "MincraftEinstein")
+        }
     }
 }
 
