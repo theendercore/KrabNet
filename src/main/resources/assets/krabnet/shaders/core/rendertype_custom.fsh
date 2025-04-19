@@ -12,5 +12,7 @@ void main() {
         discard;
     }
     float x = sin(GameTime * 1000.);
-    fragColor = vec4(x, x, x, 1.);//color * ColorModulator * GameTime;
+    float y = sin(GameTime * 300.);
+    float z = sin(GameTime * 2000.);
+    fragColor = vec4(x, y, z, .5);//color * ColorModulator * GameTime;
 }
