@@ -33,7 +33,7 @@ modSettings {
     entrypoint("fabric-datagen", "org.teamvoided.krabnet.data.gen.KrabNetData")
 
     mixinFile("${modId()}.client.mixins.json")
-//    mixinFile("${modId()}.mixins.json")
+    mixinFile("${modId()}.mixins.json")
     accessWidener("${modId()}.accesswidener")
 }
 
