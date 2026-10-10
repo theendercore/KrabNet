@@ -19,6 +19,7 @@ object KrabNet {
         KNTabs.init()
         KNEntityTypes.init()
         KNDataComponents.init()
+        KNCommands.init()
     }
 
     fun id(path: String) = Identifier.of(MODID, path)
